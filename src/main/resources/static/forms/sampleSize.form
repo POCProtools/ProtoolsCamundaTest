@@ -3,14 +3,14 @@
   "components": [
     {
       "label": "Sample Size",
-      "type": "number",
-      "id": "Field_17de2b9",
+      "type": "textfield",
+      "id": "Field_0chifa5",
       "key": "sampleSize",
       "validate": {
-        "min": 5,
-        "max": 1000,
-        "required": true
-      }
+        "required": true,
+        "regularExpressionPattern": "[0-9]+"
+      },
+      "description": "Must be a number"
     }
   ],
   "type": "default",
