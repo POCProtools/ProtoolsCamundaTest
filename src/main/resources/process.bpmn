@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_0fr9mxs" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.12.0">
+  <bpmn:process id="protools-camunda-test-process" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>SequenceFlow_1fp17al</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_1fp17al" sourceRef="StartEvent_1" targetRef="createSurvey" />
+    <bpmn:userTask id="createSurvey" name="Create survey" camunda:formKey="camunda-forms:/forms/createSurvey.form" camunda:candidateUsers="demo">
+      <bpmn:incoming>SequenceFlow_1fp17al</bpmn:incoming>
+      <bpmn:outgoing>Flow_172jxbk</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_172jxbk" sourceRef="createSurvey" targetRef="selectSampleSize" />
+    <bpmn:userTask id="selectSampleSize" name="Select sample size" camunda:formKey="camunda-forms:/forms/sampleSize.form">
+      <bpmn:incoming>Flow_172jxbk</bpmn:incoming>
+      <bpmn:outgoing>Flow_0artptf</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:task id="Activity_05t1tm0" name="Draw Sample">
+      <bpmn:incoming>Flow_0artptf</bpmn:incoming>
+      <bpmn:outgoing>Flow_0fmzv25</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0cspsrx</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_0artptf" sourceRef="selectSampleSize" targetRef="Activity_05t1tm0" />
+    <bpmn:task id="Activity_1tspeje" name="Add to survey">
+      <bpmn:incoming>Flow_0fmzv25</bpmn:incoming>
+      <bpmn:outgoing>Flow_1rqpzy8</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_0fmzv25" sourceRef="Activity_05t1tm0" targetRef="Activity_1tspeje" />
+    <bpmn:task id="Activity_0q8dazl" name="Create Accounts">
+      <bpmn:incoming>Flow_0cspsrx</bpmn:incoming>
+      <bpmn:outgoing>Flow_1xcpp8w</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_0cspsrx" sourceRef="Activity_05t1tm0" targetRef="Activity_0q8dazl" />
+    <bpmn:task id="Activity_1ly5yet" name="Survey setState to Ready">
+      <bpmn:incoming>Flow_1rqpzy8</bpmn:incoming>
+      <bpmn:incoming>Flow_1xcpp8w</bpmn:incoming>
+      <bpmn:outgoing>Flow_0pbig8p</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_1rqpzy8" sourceRef="Activity_1tspeje" targetRef="Activity_1ly5yet" />
+    <bpmn:sequenceFlow id="Flow_1xcpp8w" sourceRef="Activity_0q8dazl" targetRef="Activity_1ly5yet" />
+    <bpmn:endEvent id="Event_1n0yp34">
+      <bpmn:incoming>Flow_0pbig8p</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0pbig8p" sourceRef="Activity_1ly5yet" targetRef="Event_1n0yp34" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="protools-camunda-test-process">
+      <bpmndi:BPMNEdge id="Flow_0pbig8p_di" bpmnElement="Flow_0pbig8p">
+        <di:waypoint x="1070" y="117" />
+        <di:waypoint x="1142" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1xcpp8w_di" bpmnElement="Flow_1xcpp8w">
+        <di:waypoint x="900" y="230" />
+        <di:waypoint x="935" y="230" />
+        <di:waypoint x="935" y="117" />
+        <di:waypoint x="970" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1rqpzy8_di" bpmnElement="Flow_1rqpzy8">
+        <di:waypoint x="900" y="117" />
+        <di:waypoint x="970" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0cspsrx_di" bpmnElement="Flow_0cspsrx">
+        <di:waypoint x="730" y="117" />
+        <di:waypoint x="770" y="117" />
+        <di:waypoint x="770" y="230" />
+        <di:waypoint x="800" y="230" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0fmzv25_di" bpmnElement="Flow_0fmzv25">
+        <di:waypoint x="730" y="117" />
+        <di:waypoint x="800" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0artptf_di" bpmnElement="Flow_0artptf">
+        <di:waypoint x="560" y="117" />
+        <di:waypoint x="630" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_172jxbk_di" bpmnElement="Flow_172jxbk">
+        <di:waypoint x="390" y="117" />
+        <di:waypoint x="460" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1fp17al_di" bpmnElement="SequenceFlow_1fp17al">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="290" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_08mft2c_di" bpmnElement="createSurvey">
+        <dc:Bounds x="290" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0us0a0p_di" bpmnElement="selectSampleSize">
+        <dc:Bounds x="460" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_05t1tm0_di" bpmnElement="Activity_05t1tm0">
+        <dc:Bounds x="630" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1tspeje_di" bpmnElement="Activity_1tspeje">
+        <dc:Bounds x="800" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0q8dazl_di" bpmnElement="Activity_0q8dazl">
+        <dc:Bounds x="800" y="190" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1ly5yet_di" bpmnElement="Activity_1ly5yet">
+        <dc:Bounds x="970" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1n0yp34_di" bpmnElement="Event_1n0yp34">
+        <dc:Bounds x="1142" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
