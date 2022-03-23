@@ -7,15 +7,11 @@
   <groupId>com.example.workflow</groupId>
   <artifactId>ProtoolsTest</artifactId>
   <version>1.0.0-SNAPSHOT</version>
-  <configuration>
-    <archive>
-      <manifest>
-        <addClasspath>true</addClasspath>
-        <classpathPrefix>lib/</classpathPrefix>
-        <mainClass>com.example.protoolstest.Application</mainClass>
-      </manifest>
-    </archive>
-  </configuration>
+  <description>Demo projet for Protools using Camunda</description>
+  <properties>
+    <java.version>11</java.version>
+    <start-class>com.example.protoolstest.Application</start-class>
+  </properties>
 
   <dependencyManagement>
     <dependencies>
