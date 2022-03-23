@@ -1,7 +1,9 @@
 package com.example.protoolstest;
 
 import camundajar.impl.com.google.gson.JsonObject;
+import camundajar.impl.com.google.gson.reflect.TypeToken;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.json.JSONArray;
@@ -11,7 +13,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Named;
+import javax.ws.rs.core.HttpHeaders;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -33,31 +37,38 @@ public class addToSurvey implements JavaDelegate {
     }
 
     public int addToSurvey(String sample, String surveyID) throws IOException, InterruptedException {
-        Long surveyIDLong = Long.parseLong(surveyID);
-        JSONObject json = new JSONObject(sample);
-
-        Map<String, Object> retMap = new HashMap<String, Object>();
-        retMap = toMap(json);
-
-        LOGGER.info(retMap.toString());
-
-        var objectMapper = new ObjectMapper();
-        String requestBody = objectMapper
-                .writeValueAsString(retMap);
-
         HttpClient client = HttpClient.newHttpClient();
-        // A finir
-        // TODO : Ajouter surveyID aux personnes
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("https://coleman.dev.insee.io/persons/"))
-                .POST(HttpRequest.BodyPublishers.ofString(requestBody))
-                .build();
-        HttpResponse<String> response = client.send(request,
-                HttpResponse.BodyHandlers.ofString());
+        Gson gson = new Gson();
+        Person[] map = gson.fromJson(sample,Person[].class);
 
-        LOGGER.info(response.body());
+        LOGGER.info("add to survey : " + map.toString());
 
-        return (response.statusCode());
+        for (Person person: map){
+            var id = person.getId();
+            var values = new HashMap<String, Object>() {{
+                put("email", person.getEmail());
+                put ("nom", person.getNom());
+                put("prenom", person.getPrenom());
+                put("telephone", person.getTelephone());
+                put("id_survey",Long.parseLong(surveyID));
+            }};
+            var objectMapper = new ObjectMapper();
+            String requestBody = objectMapper
+                    .writeValueAsString(values);
+            LOGGER.info("add unit to survey: "+ requestBody);
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create("https://coleman.dev.insee.io/persons/"+ id))
+                    .setHeader(HttpHeaders.CONTENT_TYPE, "application/json")
+                    .method("PATCH",HttpRequest.BodyPublishers.ofString(requestBody))
+                    .build();
+            HttpResponse<String> response = client.send(request,
+                    HttpResponse.BodyHandlers.ofString());
+            LOGGER.info("https://coleman.dev.insee.io/persons/"+ id);
+            LOGGER.info(response.body());
+        }
+
+
+        return (200);
     }
 
     public static Map<String, Object> toMap(JSONObject object) throws JSONException {

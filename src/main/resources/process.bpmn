@@ -7,102 +7,103 @@
     <bpmn:sequenceFlow id="SequenceFlow_1fp17al" sourceRef="StartEvent_1" targetRef="createSurvey" />
     <bpmn:userTask id="createSurvey" name="Create survey" camunda:formKey="camunda-forms:/forms/createSurvey.form" camunda:candidateUsers="demo">
       <bpmn:incoming>SequenceFlow_1fp17al</bpmn:incoming>
-      <bpmn:outgoing>Flow_172jxbk</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0qs8xhm</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:sequenceFlow id="Flow_172jxbk" sourceRef="createSurvey" targetRef="selectSampleSize" />
     <bpmn:userTask id="selectSampleSize" name="Select sample size" camunda:formKey="camunda-forms:/forms/sampleSize.form">
-      <bpmn:incoming>Flow_172jxbk</bpmn:incoming>
+      <bpmn:incoming>Flow_1jdr1pu</bpmn:incoming>
       <bpmn:outgoing>Flow_0artptf</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:sequenceFlow id="Flow_0artptf" sourceRef="selectSampleSize" targetRef="drawSample" />
-    <bpmn:sequenceFlow id="Flow_0fmzv25" sourceRef="drawSample" targetRef="Activity_1tspeje" />
-    <bpmn:task id="Activity_0q8dazl" name="Create Accounts">
-      <bpmn:incoming>Flow_0cspsrx</bpmn:incoming>
-      <bpmn:outgoing>Flow_1xcpp8w</bpmn:outgoing>
-    </bpmn:task>
-    <bpmn:sequenceFlow id="Flow_0cspsrx" sourceRef="drawSample" targetRef="Activity_0q8dazl" />
-    <bpmn:task id="Activity_1ly5yet" name="Survey setState to Ready">
-      <bpmn:incoming>Flow_1rqpzy8</bpmn:incoming>
-      <bpmn:incoming>Flow_1xcpp8w</bpmn:incoming>
-      <bpmn:outgoing>Flow_0pbig8p</bpmn:outgoing>
-    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_0fmzv25" sourceRef="drawSample" targetRef="Activity_0q8dazl" />
     <bpmn:sequenceFlow id="Flow_1rqpzy8" sourceRef="Activity_1tspeje" targetRef="Activity_1ly5yet" />
-    <bpmn:sequenceFlow id="Flow_1xcpp8w" sourceRef="Activity_0q8dazl" targetRef="Activity_1ly5yet" />
     <bpmn:endEvent id="Event_1n0yp34">
-      <bpmn:incoming>Flow_0pbig8p</bpmn:incoming>
+      <bpmn:incoming>Flow_0r8stjw</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sequenceFlow id="Flow_0pbig8p" sourceRef="Activity_1ly5yet" targetRef="Event_1n0yp34" />
     <bpmn:serviceTask id="drawSample" name="Draw Sample" camunda:delegateExpression="#{drawSample}">
       <bpmn:incoming>Flow_0artptf</bpmn:incoming>
       <bpmn:outgoing>Flow_0fmzv25</bpmn:outgoing>
-      <bpmn:outgoing>Flow_0cspsrx</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:userTask id="Activity_1tspeje" name="Add to survey">
+    <bpmn:serviceTask id="Activity_0mg0o0d" name="Save newSurvey" camunda:delegateExpression="#{createSurvey}">
+      <bpmn:incoming>Flow_0qs8xhm</bpmn:incoming>
+      <bpmn:outgoing>Flow_1jdr1pu</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_0r8stjw" sourceRef="Activity_1ly5yet" targetRef="Event_1n0yp34" />
+    <bpmn:sequenceFlow id="Flow_0qs8xhm" sourceRef="createSurvey" targetRef="Activity_0mg0o0d" />
+    <bpmn:sequenceFlow id="Flow_1jdr1pu" sourceRef="Activity_0mg0o0d" targetRef="selectSampleSize" />
+    <bpmn:serviceTask id="Activity_0q8dazl" name="Create Accounts" camunda:delegateExpression="#{createAccount}">
       <bpmn:incoming>Flow_0fmzv25</bpmn:incoming>
+      <bpmn:outgoing>Flow_092vtsb</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_1tspeje" name="Add to survey" camunda:delegateExpression="#{addToSurvey}">
+      <bpmn:incoming>Flow_092vtsb</bpmn:incoming>
       <bpmn:outgoing>Flow_1rqpzy8</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:userTask id="Activity_1ly5yet" name="Survey setState to Ready">
+      <bpmn:incoming>Flow_1rqpzy8</bpmn:incoming>
+      <bpmn:outgoing>Flow_0r8stjw</bpmn:outgoing>
     </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_092vtsb" sourceRef="Activity_0q8dazl" targetRef="Activity_1tspeje" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="protools-camunda-test-process">
-      <bpmndi:BPMNEdge id="Flow_0pbig8p_di" bpmnElement="Flow_0pbig8p">
-        <di:waypoint x="1070" y="117" />
-        <di:waypoint x="1142" y="117" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1xcpp8w_di" bpmnElement="Flow_1xcpp8w">
-        <di:waypoint x="900" y="230" />
-        <di:waypoint x="935" y="230" />
-        <di:waypoint x="935" y="117" />
-        <di:waypoint x="970" y="117" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1rqpzy8_di" bpmnElement="Flow_1rqpzy8">
-        <di:waypoint x="900" y="117" />
-        <di:waypoint x="970" y="117" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0cspsrx_di" bpmnElement="Flow_0cspsrx">
-        <di:waypoint x="730" y="117" />
-        <di:waypoint x="770" y="117" />
-        <di:waypoint x="770" y="230" />
-        <di:waypoint x="800" y="230" />
+        <di:waypoint x="1340" y="117" />
+        <di:waypoint x="1460" y="117" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0fmzv25_di" bpmnElement="Flow_0fmzv25">
-        <di:waypoint x="730" y="117" />
-        <di:waypoint x="800" y="117" />
+        <di:waypoint x="890" y="117" />
+        <di:waypoint x="1000" y="117" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0artptf_di" bpmnElement="Flow_0artptf">
-        <di:waypoint x="560" y="117" />
-        <di:waypoint x="630" y="117" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_172jxbk_di" bpmnElement="Flow_172jxbk">
-        <di:waypoint x="390" y="117" />
-        <di:waypoint x="460" y="117" />
+        <di:waypoint x="710" y="117" />
+        <di:waypoint x="790" y="117" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1fp17al_di" bpmnElement="SequenceFlow_1fp17al">
-        <di:waypoint x="215" y="117" />
-        <di:waypoint x="290" y="117" />
+        <di:waypoint x="188" y="117" />
+        <di:waypoint x="250" y="117" />
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0r8stjw_di" bpmnElement="Flow_0r8stjw">
+        <di:waypoint x="1560" y="117" />
+        <di:waypoint x="1672" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0qs8xhm_di" bpmnElement="Flow_0qs8xhm">
+        <di:waypoint x="350" y="117" />
+        <di:waypoint x="430" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1jdr1pu_di" bpmnElement="Flow_1jdr1pu">
+        <di:waypoint x="530" y="117" />
+        <di:waypoint x="610" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_092vtsb_di" bpmnElement="Flow_092vtsb">
+        <di:waypoint x="1100" y="117" />
+        <di:waypoint x="1240" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Activity_02zx9rg_di" bpmnElement="drawSample">
+        <dc:Bounds x="790" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
-        <dc:Bounds x="179" y="99" width="36" height="36" />
+        <dc:Bounds x="152" y="99" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="UserTask_08mft2c_di" bpmnElement="createSurvey">
-        <dc:Bounds x="290" y="77" width="100" height="80" />
+        <dc:Bounds x="250" y="77" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0us0a0p_di" bpmnElement="selectSampleSize">
-        <dc:Bounds x="460" y="77" width="100" height="80" />
+        <dc:Bounds x="610" y="77" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0q8dazl_di" bpmnElement="Activity_0q8dazl">
-        <dc:Bounds x="800" y="190" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1ly5yet_di" bpmnElement="Activity_1ly5yet">
-        <dc:Bounds x="970" y="77" width="100" height="80" />
+      <bpmndi:BPMNShape id="Activity_1rqvf6z_di" bpmnElement="Activity_0mg0o0d">
+        <dc:Bounds x="430" y="77" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1n0yp34_di" bpmnElement="Event_1n0yp34">
-        <dc:Bounds x="1142" y="99" width="36" height="36" />
+        <dc:Bounds x="1672" y="99" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_02zx9rg_di" bpmnElement="drawSample">
-        <dc:Bounds x="630" y="77" width="100" height="80" />
+      <bpmndi:BPMNShape id="Activity_0tg07dr_di" bpmnElement="Activity_1ly5yet">
+        <dc:Bounds x="1460" y="77" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0fw6snw_di" bpmnElement="Activity_1tspeje">
-        <dc:Bounds x="800" y="77" width="100" height="80" />
+      <bpmndi:BPMNShape id="Activity_1rz4ccs_di" bpmnElement="Activity_1tspeje">
+        <dc:Bounds x="1240" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0ymq7a7_di" bpmnElement="Activity_0q8dazl">
+        <dc:Bounds x="1000" y="77" width="100" height="80" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

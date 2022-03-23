@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Named;
+import javax.ws.rs.core.HttpHeaders;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -39,10 +40,11 @@ public class createSurvey implements JavaDelegate {
         var objectMapper = new ObjectMapper();
         String requestBody = objectMapper
                 .writeValueAsString(values);
-
+        LOGGER.info(requestBody);
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://coleman.dev.insee.io/surveys/"))
+                .setHeader(HttpHeaders.CONTENT_TYPE, "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(requestBody))
                 .build();
         HttpResponse<String> response = client.send(request,
@@ -51,7 +53,8 @@ public class createSurvey implements JavaDelegate {
         LOGGER.info(response.body());
 
         JSONObject jsonResponse = new JSONObject(response.body());
-        String idSurvey = jsonResponse.getString("id");
+        int idInt = jsonResponse.getInt("id");
+        String idSurvey = String.valueOf(idInt);
         return idSurvey;
 
     }
