@@ -7,6 +7,15 @@
   <groupId>com.example.workflow</groupId>
   <artifactId>ProtoolsTest</artifactId>
   <version>1.0.0-SNAPSHOT</version>
+  <configuration>
+    <archive>
+      <manifest>
+        <addClasspath>true</addClasspath>
+        <classpathPrefix>lib/</classpathPrefix>
+        <mainClass>com.example.protoolstest.Application</mainClass>
+      </manifest>
+    </archive>
+  </configuration>
 
   <dependencyManagement>
     <dependencies>
