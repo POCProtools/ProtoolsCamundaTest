@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: protools-camunda
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: protools-camunda
+  template:
+    metadata:
+      labels:
+        app: protools-camunda
+    spec:
+      containers:
+        - name: protools-camunda
+          image: mailinenguyen/protools-camunda
