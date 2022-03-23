@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 2,
+  "components": [
+    {
+      "label": "Survey Name",
+      "type": "textfield",
+      "id": "Field_0uyrqom",
+      "key": "surveyName",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Start Date",
+      "type": "textfield",
+      "id": "Field_1f0e82f",
+      "key": "dateDeb",
+      "validate": {
+        "required": true,
+        "regularExpressionPattern": "^(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\\d\\d$"
+      },
+      "description": "Format : mm/dd/yyyy"
+    },
+    {
+      "label": "End Date",
+      "type": "textfield",
+      "id": "Field_0go38zb",
+      "key": "endDate",
+      "validate": {
+        "regularExpressionPattern": "^(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\\d\\d$"
+      },
+      "description": "Format : mm/dd/yyyy"
+    }
+  ],
+  "type": "default",
+  "id": "createSurveyForm"
+}
