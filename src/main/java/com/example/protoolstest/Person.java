@@ -9,7 +9,7 @@ public class Person {
     private String prenom;
     private String email;
     private String telephone;
-    private Long idSurvey;
+    private Long id_survey;
     public Person() {
 
     }
@@ -41,11 +41,11 @@ public class Person {
     }
 
     public Long getIdSurvey() {
-        return idSurvey;
+        return id_survey;
     }
 
     public void setIdSurvey(Long idSurvey) {
-        this.idSurvey = idSurvey;
+        this.id_survey = idSurvey;
     }
 
     public String getEmail() {

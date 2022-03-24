@@ -45,21 +45,21 @@ public class addToSurvey implements JavaDelegate {
 
         for (Person person: map){
             var id = person.getId();
-            var values = new HashMap<String, Object>() {{
+            var values = new HashMap<String, String>() {{
                 put("email", person.getEmail());
                 put ("nom", person.getNom());
                 put("prenom", person.getPrenom());
                 put("telephone", person.getTelephone());
-                put("id_survey",Long.parseLong(surveyID));
+                put("id_survey",surveyID);
             }};
             var objectMapper = new ObjectMapper();
             String requestBody = objectMapper
                     .writeValueAsString(values);
             LOGGER.info("add unit to survey: "+ requestBody);
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create("https://coleman.dev.insee.io/persons/"+ id))
+                    .uri(URI.create("https://coleman.dev.insee.io/surveys/"+ surveyID+"/units"))
                     .setHeader(HttpHeaders.CONTENT_TYPE, "application/json")
-                    .method("PATCH",HttpRequest.BodyPublishers.ofString(requestBody))
+                    .POST(HttpRequest.BodyPublishers.ofString(requestBody))
                     .build();
             HttpResponse<String> response = client.send(request,
                     HttpResponse.BodyHandlers.ofString());
