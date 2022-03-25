@@ -1,5 +1,6 @@
 package com.example.protoolstest;
 
+import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.slf4j.Logger;
@@ -22,8 +23,12 @@ public class drawSample implements JavaDelegate {
     public void execute(DelegateExecution delegateExecution) throws Exception {
         String sampleSize = (String) delegateExecution.getVariable("sampleSize");
         int sampleSizeInt = Integer.parseInt(sampleSize);
-        String respnse = getSample(sampleSizeInt);
-        delegateExecution.setVariable("body",respnse);
+        if (sampleSizeInt > 4){
+            String respnse = getSample(sampleSizeInt);
+            delegateExecution.setVariable("body",respnse);
+        }else {
+            throw new BpmnError("sampleSize_low","The sample size must be greater than 5");
+        }
     }
 
     public String getSample(int sampleSize) throws IOException, InterruptedException {
