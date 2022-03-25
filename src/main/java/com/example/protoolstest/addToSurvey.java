@@ -42,7 +42,7 @@ public class addToSurvey implements JavaDelegate {
         Person[] map = gson.fromJson(sample,Person[].class);
 
         LOGGER.info("add to survey : " + map.toString());
-
+        int statusCode = 0;
         for (Person person: map){
             var id = person.getId();
             var values = new HashMap<String, String>() {{
@@ -55,6 +55,7 @@ public class addToSurvey implements JavaDelegate {
             var objectMapper = new ObjectMapper();
             String requestBody = objectMapper
                     .writeValueAsString(values);
+            requestBody = "[" + requestBody + "]";
             LOGGER.info("add unit to survey: "+ requestBody);
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create("https://coleman.dev.insee.io/surveys/"+ surveyID+"/units"))
@@ -65,10 +66,11 @@ public class addToSurvey implements JavaDelegate {
                     HttpResponse.BodyHandlers.ofString());
             LOGGER.info("https://coleman.dev.insee.io/persons/"+ id);
             LOGGER.info(response.body());
+            statusCode = response.statusCode();
         }
 
 
-        return (200);
+        return (statusCode);
     }
 
     public static Map<String, Object> toMap(JSONObject object) throws JSONException {

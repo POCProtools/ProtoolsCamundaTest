@@ -27,8 +27,14 @@ public class createAccount implements JavaDelegate {
     public void execute(DelegateExecution delegateExecution) throws Exception {
         String sample = (String) delegateExecution.getVariable("body");
         String surveyID = (String) delegateExecution.getVariable("surveyID");
-        int responseCodeCreateAccount = getNewAccounts(sample,surveyID);
-        delegateExecution.setVariable("respCodeCreateAccount",responseCodeCreateAccount);
+        try {
+            int responseCodeCreateAccount = getNewAccounts(sample,surveyID);
+            delegateExecution.setVariable("respCodeCreateAccount",responseCodeCreateAccount);
+        } catch (Exception e){
+            LOGGER.info(e.getMessage());
+        }
+
+
 
     }
 
@@ -38,7 +44,7 @@ public class createAccount implements JavaDelegate {
         Person[] map = gson.fromJson(sample,Person[].class);
 
         LOGGER.info("Create account : " + map.toString());
-
+        int statusCode = 0;
         for (Person person: map) {
             var values = new HashMap<String, Object>() {{
                 put("email", person.getEmail());
@@ -53,15 +59,17 @@ public class createAccount implements JavaDelegate {
             requestBody = "[" + requestBody + "]";
             LOGGER.info("Create account for unit: " + requestBody);
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create("https://annuaire.dev.insee.io/comptes/"))
+                    .uri(URI.create("https://annuaire.dev.insee.io/comptes/"+surveyID))
                     .setHeader(HttpHeaders.CONTENT_TYPE, "application/json")
                     .POST(HttpRequest.BodyPublishers.ofString(requestBody))
                     .build();
             HttpResponse<String> response = client.send(request,
                     HttpResponse.BodyHandlers.ofString());
 
-            LOGGER.info(response.body());
+            LOGGER.info(String.valueOf(response.statusCode()));
+            statusCode = response.statusCode();
+
         }
-        return(200);
+        return(statusCode);
     }
 }
