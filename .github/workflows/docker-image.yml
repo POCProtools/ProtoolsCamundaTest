@@ -22,7 +22,7 @@ jobs:
           java-version: 11
 
       - name: Build project with Maven
-        run: mvn clean install
+        run: mvn clean package
 
       - name: Publish to Registry
         uses: elgohr/Publish-Docker-Github-Action@master
