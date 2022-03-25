@@ -15,3 +15,13 @@ spec:
       containers:
         - name: protools-camunda
           image: mailinenguyen/protools-camunda
+          env:
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: protools-camunda-postgresql
+                  key: postgres-password
+            - name: SPRING_DATASOURCE_USERNAME
+              value: postgres
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://protools-camunda-postgresql/
