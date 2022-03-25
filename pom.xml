@@ -10,7 +10,7 @@
   <description>Demo projet for Protools using Camunda</description>
   <properties>
     <java.version>11</java.version>
-    <start-class>com.example.protoolstest.Application</start-class>
+    <start-class>com.example.protoolstest.Application.main</start-class>
   </properties>
 
   <dependencyManagement>
@@ -103,19 +103,7 @@
           <target>11</target>
         </configuration>
       </plugin>
-      <plugin>
-        <!-- Build an executable JAR -->
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        <version>3.2.2</version>
-        <configuration>
-          <archive>
-            <manifest>
-              <mainClass>com.example.protoolstest.Application</mainClass>
-            </manifest>
-          </archive>
-        </configuration>
-      </plugin>
+
     </plugins>
   </build>
 
