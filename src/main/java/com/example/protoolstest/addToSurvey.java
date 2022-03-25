@@ -25,9 +25,9 @@ import java.util.*;
 @Named
 public class addToSurvey implements JavaDelegate {
     static final Logger LOGGER = LoggerFactory.getLogger(drawSample.class);
+
     public addToSurvey() {
     }
-
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
         String sample = (String) delegateExecution.getVariable("body");
@@ -36,6 +36,14 @@ public class addToSurvey implements JavaDelegate {
         delegateExecution.setVariable("createAccountStatus",respnse);
     }
 
+    /**
+     *
+     * @param sample
+     * @param surveyID
+     * @return
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public int addToSurvey(String sample, String surveyID) throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
         Gson gson = new Gson();
@@ -73,6 +81,12 @@ public class addToSurvey implements JavaDelegate {
         return (statusCode);
     }
 
+    /**
+     *
+     * @param object
+     * @return
+     * @throws JSONException
+     */
     public static Map<String, Object> toMap(JSONObject object) throws JSONException {
         Map<String, Object> map = new HashMap<String, Object>();
 
@@ -93,6 +107,12 @@ public class addToSurvey implements JavaDelegate {
         return map;
     }
 
+    /**
+     *
+     * @param array
+     * @return
+     * @throws JSONException
+     */
     public static List<Object> toList(JSONArray array) throws JSONException {
         List<Object> list = new ArrayList<Object>();
         for(int i = 0; i < array.length(); i++) {

@@ -19,6 +19,11 @@ public class drawSample implements JavaDelegate {
     public drawSample() {
     }
 
+    /**
+     *
+     * @param delegateExecution
+     * @throws Exception
+     */
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
         String sampleSize = (String) delegateExecution.getVariable("sampleSize");
@@ -31,6 +36,13 @@ public class drawSample implements JavaDelegate {
         }
     }
 
+    /**
+     *
+     * @param sampleSize
+     * @return
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public String getSample(int sampleSize) throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
         String url = "https://crabe.dev.insee.io/persons/sample/" + String.valueOf(sampleSize);

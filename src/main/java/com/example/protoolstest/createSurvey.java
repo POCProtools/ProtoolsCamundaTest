@@ -21,6 +21,11 @@ import java.util.HashMap;
 public class createSurvey implements JavaDelegate {
     static final Logger LOGGER = LoggerFactory.getLogger(createSurvey.class);
 
+    /**
+     *
+     * @param delegateExecution
+     * @throws Exception
+     */
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
         String surveyName = (String) delegateExecution.getVariable("surveyName");
@@ -30,6 +35,15 @@ public class createSurvey implements JavaDelegate {
         delegateExecution.setVariable("surveyID", surveyID);
     }
 
+    /**
+     *
+     * @param surveyName
+     * @param dateDeb
+     * @param dateEnd
+     * @return
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public String saveSurvey(String surveyName, String dateDeb, String dateEnd) throws IOException, InterruptedException {
         var values = new HashMap<String, String>() {{
             put("name", surveyName);

@@ -23,6 +23,12 @@ import java.util.Map;
 public class createAccount implements JavaDelegate {
     static final Logger LOGGER = LoggerFactory.getLogger(createAccount.class);
     public createAccount(){}
+
+    /**
+     *
+     * @param delegateExecution
+     * @throws Exception
+     */
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
         String sample = (String) delegateExecution.getVariable("body");
@@ -38,6 +44,14 @@ public class createAccount implements JavaDelegate {
 
     }
 
+    /**
+     *
+     * @param sample
+     * @param surveyID
+     * @return
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public int getNewAccounts(String sample, String surveyID) throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
         Gson gson = new Gson();
