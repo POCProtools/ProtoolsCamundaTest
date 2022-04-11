@@ -38,11 +38,11 @@
       <bpmn:incoming>Flow_0xkrr3a</bpmn:incoming>
       <bpmn:outgoing>Flow_1k4ejgw</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:intermediateCatchEvent id="Event_0r8maof" name="11/04:11h">
+    <bpmn:intermediateCatchEvent id="Event_0r8maof" name="2min wait">
       <bpmn:incoming>Flow_14ofyf5</bpmn:incoming>
       <bpmn:outgoing>Flow_0dky6nx</bpmn:outgoing>
       <bpmn:timerEventDefinition id="TimerEventDefinition_176io5m">
-        <bpmn:timeDate xsi:type="bpmn:tFormalExpression">2022-04-11T11:00:00</bpmn:timeDate>
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT120S</bpmn:timeDuration>
       </bpmn:timerEventDefinition>
     </bpmn:intermediateCatchEvent>
     <bpmn:sequenceFlow id="Flow_14ofyf5" sourceRef="Activity_0mg0o0d" targetRef="Event_0r8maof" />
@@ -86,10 +86,10 @@
       <bpmn:extensionElements>
         <camunda:connector>
           <camunda:inputOutput>
-            <camunda:inputParameter name="to"><![CDATA[nguyen.mailine@gmail.com]]></camunda:inputParameter>
-            <camunda:inputParameter name="subject"><![CDATA[TestCamundaEnquête]]></camunda:inputParameter>
+            <camunda:inputParameter name="to">nguyen.mailine@gmail.com</camunda:inputParameter>
+            <camunda:inputParameter name="subject">TestCamundaEnquête</camunda:inputParameter>
             <camunda:inputParameter name="text">
-              <camunda:script scriptFormat="freemarker"><![CDATA[Hello, La prochaine étape de l'enquête est prête]]></camunda:script>
+              <camunda:script scriptFormat="freemarker">Hello, La prochaine étape de l'enquête est prête</camunda:script>
             </camunda:inputParameter>
           </camunda:inputOutput>
           <camunda:connectorId>mail-send</camunda:connectorId>
@@ -203,7 +203,7 @@
       <bpmndi:BPMNShape id="Event_0s1ps83_di" bpmnElement="Event_0r8maof">
         <dc:Bounds x="612" y="349" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="611" y="392" width="48" height="14" />
+          <dc:Bounds x="613" y="392" width="47" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0065hk6_di" bpmnElement="Activity_1cdjgag">
