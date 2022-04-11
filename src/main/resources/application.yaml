@@ -1,25 +1,19 @@
 spring.datasource.url: jdbc:h2:file:./camunda-h2-database
 
-camunda:
-  admin-user:
-    id: demo
-    password: demo
-  bpm:
-    database:
-      type: postgres
-    table-prefix: camunda.
-    schema-update: true
+camunda.bpm.admin-user:
+  id: demo
+  password: demo
 
-spring:
-  main:
-    allow-bean-definition-overriding: true
-  jpa:
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-  datasource:
-    driverClassName: org.postgresql.Driver
+# spring:
+  # main:
+    # allow-bean-definition-overriding: true
+  # jpa:
+    #properties:
+      #hibernate:
+        #dialect: org.hibernate.dialect.PostgreSQLDialect
+  #datasource:
+    #driverClassName: org.postgresql.Driver
     #DB connection:
-    url: jdbc:postgresql://localhost:5432/workflow?stringtype=unspecified
-    username: xxxxx
-    password: xxxxx
+    #url: jdbc:postgresql://localhost:5432/workflow?stringtype=unspecified
+    #username: xxxxx
+    #password: xxxxx
