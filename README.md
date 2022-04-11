@@ -14,3 +14,7 @@ git clone git@github.com:Stage2022/ProtoolsCamundaTest.git
 cd ProtoolsCamundaTest
 ./mvnw spring-boot:run
 ```
+
+#### TODO:
+- Tests 
+- Intégration de mails (envoi)
