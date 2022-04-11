@@ -54,10 +54,7 @@
         <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT20S</bpmn:timeDuration>
       </bpmn:timerEventDefinition>
     </bpmn:boundaryEvent>
-    <bpmn:sequenceFlow id="Flow_1v1xgmv" sourceRef="Event_00qku9i" targetRef="Activity_1sacw5w" />
-    <bpmn:userTask id="Activity_1sacw5w" name="SendMessageToSelectSample">
-      <bpmn:incoming>Flow_1v1xgmv</bpmn:incoming>
-    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_1v1xgmv" sourceRef="Event_00qku9i" targetRef="SendEmail" />
     <bpmn:boundaryEvent id="Event_0c71p2f" attachedToRef="drawSample">
       <bpmn:outgoing>Flow_11b1b4v</bpmn:outgoing>
       <bpmn:errorEventDefinition id="ErrorEventDefinition_0tdg4y6" />
@@ -85,6 +82,21 @@
     </bpmn:parallelGateway>
     <bpmn:sequenceFlow id="Flow_1jurpbc" sourceRef="Activity_1tspeje" targetRef="Gateway_0usskqf" />
     <bpmn:sequenceFlow id="Flow_0xkrr3a" sourceRef="Gateway_0usskqf" targetRef="Activity_1ly5yet" />
+    <bpmn:serviceTask id="SendEmail" name="SendMessageToSelectSample">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="to"><![CDATA[nguyen.mailine@gmail.com]]></camunda:inputParameter>
+            <camunda:inputParameter name="subject"><![CDATA[TestCamundaEnquête]]></camunda:inputParameter>
+            <camunda:inputParameter name="text">
+              <camunda:script scriptFormat="freemarker"><![CDATA[Hello, La prochaine étape de l'enquête est prête]]></camunda:script>
+            </camunda:inputParameter>
+          </camunda:inputOutput>
+          <camunda:connectorId>mail-send</camunda:connectorId>
+        </camunda:connector>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1v1xgmv</bpmn:incoming>
+    </bpmn:serviceTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="protools-camunda-test-process">
@@ -194,9 +206,6 @@
           <dc:Bounds x="611" y="392" width="48" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0gkfkt1_di" bpmnElement="Activity_1sacw5w">
-        <dc:Bounds x="870" y="450" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0065hk6_di" bpmnElement="Activity_1cdjgag">
         <dc:Bounds x="940" y="140" width="100" height="80" />
       </bpmndi:BPMNShape>
@@ -205,6 +214,9 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_045tluz_di" bpmnElement="Gateway_0usskqf">
         <dc:Bounds x="1395" y="342" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_19axzj0_di" bpmnElement="SendEmail">
+        <dc:Bounds x="870" y="450" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1w89h87_di" bpmnElement="Event_0c71p2f">
         <dc:Bounds x="972" y="309" width="36" height="36" />

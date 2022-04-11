@@ -31,6 +31,15 @@
         <type>pom</type>
       </dependency>
     </dependencies>
+    <dependencies>
+      <dependency>
+        <groupId>org.camunda.connect</groupId>
+        <artifactId>camunda-connect-bom</artifactId>
+        <scope>import</scope>
+        <type>pom</type>
+        <version>${version.connect}</version>
+      </dependency>
+    </dependencies>
   </dependencyManagement>
 
   <dependencies>
@@ -54,6 +63,21 @@
     <dependency>
       <groupId>org.camunda.spin</groupId>
       <artifactId>camunda-spin-dataformat-all</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.camunda.connect</groupId>
+      <artifactId>camunda-connect-core</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.camunda.connect</groupId>
+      <artifactId>camunda-connect-connectors-all</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.camunda.bpm</groupId>
+      <artifactId>camunda-engine-plugin-connect</artifactId>
     </dependency>
 
     <dependency>
@@ -82,6 +106,12 @@
     <dependency>
       <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.camunda.bpm.extension</groupId>
+      <artifactId>camunda-bpm-mail-core</artifactId>
+      <version>1.2.0</version>
     </dependency>
 
   </dependencies>
