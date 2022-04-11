@@ -30,8 +30,6 @@
         <scope>import</scope>
         <type>pom</type>
       </dependency>
-    </dependencies>
-    <dependencies>
       <dependency>
         <groupId>org.camunda.connect</groupId>
         <artifactId>camunda-connect-bom</artifactId>
@@ -40,6 +38,7 @@
         <version>${version.connect}</version>
       </dependency>
     </dependencies>
+
   </dependencyManagement>
 
   <dependencies>
