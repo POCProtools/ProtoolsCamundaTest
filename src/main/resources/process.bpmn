@@ -86,10 +86,10 @@
       <bpmn:extensionElements>
         <camunda:connector>
           <camunda:inputOutput>
-            <camunda:inputParameter name="to">nguyen.mailine@gmail.com</camunda:inputParameter>
-            <camunda:inputParameter name="subject">TestCamundaEnquête</camunda:inputParameter>
+            <camunda:inputParameter name="to"><![CDATA[nguyen.mailine@gmail.com]]></camunda:inputParameter>
+            <camunda:inputParameter name="subject"><![CDATA[Enquête]]></camunda:inputParameter>
             <camunda:inputParameter name="text">
-              <camunda:script scriptFormat="freemarker">Hello, La prochaine étape de l'enquête est prête</camunda:script>
+              <camunda:script scriptFormat="freemarker"><![CDATA[Hello, La prochaine étape de l'enquête est prête]]></camunda:script>
             </camunda:inputParameter>
           </camunda:inputOutput>
           <camunda:connectorId>mail-send</camunda:connectorId>
