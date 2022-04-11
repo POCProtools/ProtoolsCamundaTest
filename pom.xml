@@ -57,6 +57,13 @@
       <version>7.17.0</version>
     </dependency>
 
+    <!-- https://mvnrepository.com/artifact/org.camunda.template-engines/camunda-template-engines-freemarker -->
+    <dependency>
+      <groupId>org.camunda.template-engines</groupId>
+      <artifactId>camunda-template-engines-freemarker</artifactId>
+      <version>2.1.0</version>
+    </dependency>
+
 
     <!-- https://mvnrepository.com/artifact/org.camunda.spin/camunda-spin-dataformat-all -->
     <dependency>
