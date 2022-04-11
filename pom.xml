@@ -130,7 +130,14 @@
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
-      <version>5.8.2</version>
+      <version>5.7.0</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.camunda.bpm.extension</groupId>
+      <artifactId>camunda-bpm-junit5</artifactId>
+      <version>1.0.0</version>
       <scope>test</scope>
     </dependency>
 
@@ -145,6 +152,12 @@
       <groupId>org.mockito</groupId>
       <artifactId>mockito-core</artifactId>
       <version>4.4.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <version>3.22.0</version>
+      <scope>test</scope>
     </dependency>
 
   </dependencies>
