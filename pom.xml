@@ -23,20 +23,6 @@
         <scope>import</scope>
       </dependency>
 
-      <dependency>
-        <groupId>org.camunda.bpm</groupId>
-        <artifactId>camunda-bom</artifactId>
-        <version>7.15.0</version>
-        <scope>import</scope>
-        <type>pom</type>
-      </dependency>
-      <dependency>
-        <groupId>org.camunda.connect</groupId>
-        <artifactId>camunda-connect-bom</artifactId>
-        <scope>import</scope>
-        <type>pom</type>
-        <version>${version.connect}</version>
-      </dependency>
     </dependencies>
 
   </dependencyManagement>
@@ -47,6 +33,16 @@
       <artifactId>camunda-bpm-spring-boot-starter-rest</artifactId>
       <version>7.15.0</version>
     </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.camunda.bpm/camunda-bom -->
+    <dependency>
+      <groupId>org.camunda.bpm</groupId>
+      <artifactId>camunda-bom</artifactId>
+      <version>7.17.0</version>
+      <type>pom</type>
+      <scope>test</scope>
+    </dependency>
+
 
     <dependency>
       <groupId>org.camunda.bpm.springboot</groupId>
