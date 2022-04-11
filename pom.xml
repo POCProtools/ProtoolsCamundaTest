@@ -20,8 +20,8 @@
         <groupId>org.camunda.bpm</groupId>
         <artifactId>camunda-bom</artifactId>
         <version>7.17.0</version>
+        <scope>import</scope>
         <type>pom</type>
-        <scope>test</scope>
       </dependency>
 
       <dependency>
@@ -50,29 +50,40 @@
       <version>7.15.0</version>
     </dependency>
 
+    <!-- https://mvnrepository.com/artifact/org.camunda.bpm/camunda-engine-plugin-spin -->
     <dependency>
       <groupId>org.camunda.bpm</groupId>
       <artifactId>camunda-engine-plugin-spin</artifactId>
+      <version>7.17.0</version>
     </dependency>
 
+
+    <!-- https://mvnrepository.com/artifact/org.camunda.spin/camunda-spin-dataformat-all -->
     <dependency>
       <groupId>org.camunda.spin</groupId>
       <artifactId>camunda-spin-dataformat-all</artifactId>
+      <version>1.14.0</version>
     </dependency>
 
+    <!-- https://mvnrepository.com/artifact/org.camunda.connect/camunda-connect-core -->
     <dependency>
       <groupId>org.camunda.connect</groupId>
       <artifactId>camunda-connect-core</artifactId>
+      <version>1.5.2</version>
     </dependency>
 
+    <!-- https://mvnrepository.com/artifact/org.camunda.connect/camunda-connect-connectors-all -->
     <dependency>
       <groupId>org.camunda.connect</groupId>
       <artifactId>camunda-connect-connectors-all</artifactId>
+      <version>1.5.2</version>
     </dependency>
 
+    <!-- https://mvnrepository.com/artifact/org.camunda.bpm/camunda-engine-plugin-connect -->
     <dependency>
       <groupId>org.camunda.bpm</groupId>
       <artifactId>camunda-engine-plugin-connect</artifactId>
+      <version>7.17.0</version>
     </dependency>
 
     <dependency>
