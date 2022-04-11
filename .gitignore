@@ -10,7 +10,7 @@
 *.nar
 *.db
 hs_err_pid*
-*.properties
+## *.properties
 
 ##############################
 ## Maven
