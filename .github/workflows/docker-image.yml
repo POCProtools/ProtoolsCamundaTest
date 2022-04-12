@@ -22,7 +22,7 @@ jobs:
           java-version: 11
 
       - name: Build project with Maven
-        run: mvn clean package
+        run: mvn clean package -Dmaven.test.skip
 
       - name: Publish to Registry
         uses: elgohr/Publish-Docker-Github-Action@master
