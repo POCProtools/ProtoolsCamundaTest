@@ -1,6 +1,5 @@
 package com.example.protoolstest;
 
-import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.test.Deployment;
 import org.camunda.bpm.extension.junit5.test.ProcessEngineExtension;
@@ -16,14 +15,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.HashMap;
 
-import static org.camunda.bpm.engine.test.assertions.bpmn.BpmnAwareTests.withVariables;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(ProcessEngineExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class ProcessTest {
+public class DrawSampleTest {
 
     DelegateExecution execution;
     HashMap<String, Object> variables = new HashMap<>();

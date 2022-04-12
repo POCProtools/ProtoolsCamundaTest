@@ -9,7 +9,7 @@
       <bpmn:incoming>SequenceFlow_1fp17al</bpmn:incoming>
       <bpmn:outgoing>Flow_0qs8xhm</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="selectSampleSize" name="Select sample size" camunda:formKey="camunda-forms:/forms/sampleSize.form">
+    <bpmn:userTask id="SelectSampleSize" name="Select sample size" camunda:formKey="camunda-forms:/forms/sampleSize.form">
       <bpmn:incoming>Flow_0dky6nx</bpmn:incoming>
       <bpmn:incoming>Flow_1wq57y0</bpmn:incoming>
       <bpmn:outgoing>Flow_0jm83hr</bpmn:outgoing>
@@ -17,24 +17,24 @@
     <bpmn:endEvent id="Event_1n0yp34" name="Sortie">
       <bpmn:incoming>Flow_1k4ejgw</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:serviceTask id="drawSample" name="Draw Sample" camunda:delegateExpression="#{drawSample}">
+    <bpmn:serviceTask id="DrawSample" name="Draw Sample" camunda:delegateExpression="#{drawSample}">
       <bpmn:incoming>Flow_0jm83hr</bpmn:incoming>
       <bpmn:outgoing>Flow_0piw8vb</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:serviceTask id="Activity_0mg0o0d" name="Save newSurvey" camunda:delegateExpression="#{createSurvey}">
+    <bpmn:serviceTask id="SaveNewSurvey" name="Save newSurvey" camunda:delegateExpression="#{createSurvey}">
       <bpmn:incoming>Flow_0qs8xhm</bpmn:incoming>
       <bpmn:outgoing>Flow_14ofyf5</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:sequenceFlow id="Flow_0qs8xhm" sourceRef="createSurvey" targetRef="Activity_0mg0o0d" />
-    <bpmn:serviceTask id="Activity_0q8dazl" name="Create Accounts" camunda:delegateExpression="#{createAccount}">
+    <bpmn:sequenceFlow id="Flow_0qs8xhm" sourceRef="createSurvey" targetRef="SaveNewSurvey" />
+    <bpmn:serviceTask id="CreateAccounts" name="Create Accounts" camunda:delegateExpression="#{createAccount}">
       <bpmn:incoming>Flow_0zxyh38</bpmn:incoming>
       <bpmn:outgoing>Flow_059bqv3</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:serviceTask id="Activity_1tspeje" name="Add to survey" camunda:delegateExpression="#{addToSurvey}">
+    <bpmn:serviceTask id="AddToSurvey" name="Add to survey" camunda:delegateExpression="#{addToSurvey}">
       <bpmn:incoming>Flow_0c9fp39</bpmn:incoming>
       <bpmn:outgoing>Flow_1jurpbc</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:userTask id="Activity_1ly5yet" name="Survey setState to Ready">
+    <bpmn:userTask id="SetState" name="Survey setState to Ready">
       <bpmn:incoming>Flow_0xkrr3a</bpmn:incoming>
       <bpmn:outgoing>Flow_1k4ejgw</bpmn:outgoing>
     </bpmn:userTask>
@@ -45,17 +45,17 @@
         <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT120S</bpmn:timeDuration>
       </bpmn:timerEventDefinition>
     </bpmn:intermediateCatchEvent>
-    <bpmn:sequenceFlow id="Flow_14ofyf5" sourceRef="Activity_0mg0o0d" targetRef="Event_0r8maof" />
-    <bpmn:sequenceFlow id="Flow_0dky6nx" sourceRef="Event_0r8maof" targetRef="selectSampleSize" />
-    <bpmn:sequenceFlow id="Flow_0jm83hr" sourceRef="selectSampleSize" targetRef="drawSample" />
-    <bpmn:boundaryEvent id="Event_00qku9i" name="20s into the task" cancelActivity="false" attachedToRef="selectSampleSize">
+    <bpmn:sequenceFlow id="Flow_14ofyf5" sourceRef="SaveNewSurvey" targetRef="Event_0r8maof" />
+    <bpmn:sequenceFlow id="Flow_0dky6nx" sourceRef="Event_0r8maof" targetRef="SelectSampleSize" />
+    <bpmn:sequenceFlow id="Flow_0jm83hr" sourceRef="SelectSampleSize" targetRef="DrawSample" />
+    <bpmn:boundaryEvent id="Event_00qku9i" name="20s into the task" cancelActivity="false" attachedToRef="SelectSampleSize">
       <bpmn:outgoing>Flow_1v1xgmv</bpmn:outgoing>
       <bpmn:timerEventDefinition id="TimerEventDefinition_0ssqltw">
         <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT20S</bpmn:timeDuration>
       </bpmn:timerEventDefinition>
     </bpmn:boundaryEvent>
     <bpmn:sequenceFlow id="Flow_1v1xgmv" sourceRef="Event_00qku9i" targetRef="SendEmail" />
-    <bpmn:boundaryEvent id="Event_0c71p2f" attachedToRef="drawSample">
+    <bpmn:boundaryEvent id="Event_0c71p2f" attachedToRef="DrawSample">
       <bpmn:outgoing>Flow_11b1b4v</bpmn:outgoing>
       <bpmn:errorEventDefinition id="ErrorEventDefinition_0tdg4y6" />
     </bpmn:boundaryEvent>
@@ -64,27 +64,27 @@
       <bpmn:incoming>Flow_11b1b4v</bpmn:incoming>
       <bpmn:outgoing>Flow_1wq57y0</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:sequenceFlow id="Flow_1wq57y0" sourceRef="Activity_1cdjgag" targetRef="selectSampleSize" />
-    <bpmn:sequenceFlow id="Flow_1k4ejgw" sourceRef="Activity_1ly5yet" targetRef="Event_1n0yp34" />
-    <bpmn:sequenceFlow id="Flow_0piw8vb" sourceRef="drawSample" targetRef="Gateway_1vyvinl" />
+    <bpmn:sequenceFlow id="Flow_1wq57y0" sourceRef="Activity_1cdjgag" targetRef="SelectSampleSize" />
+    <bpmn:sequenceFlow id="Flow_1k4ejgw" sourceRef="SetState" targetRef="Event_1n0yp34" />
+    <bpmn:sequenceFlow id="Flow_0piw8vb" sourceRef="DrawSample" targetRef="Gateway_1vyvinl" />
     <bpmn:parallelGateway id="Gateway_1vyvinl">
       <bpmn:incoming>Flow_0piw8vb</bpmn:incoming>
       <bpmn:outgoing>Flow_0zxyh38</bpmn:outgoing>
       <bpmn:outgoing>Flow_0c9fp39</bpmn:outgoing>
     </bpmn:parallelGateway>
-    <bpmn:sequenceFlow id="Flow_0zxyh38" sourceRef="Gateway_1vyvinl" targetRef="Activity_0q8dazl" />
-    <bpmn:sequenceFlow id="Flow_0c9fp39" sourceRef="Gateway_1vyvinl" targetRef="Activity_1tspeje" />
-    <bpmn:sequenceFlow id="Flow_059bqv3" sourceRef="Activity_0q8dazl" targetRef="Gateway_0usskqf" />
+    <bpmn:sequenceFlow id="Flow_0zxyh38" sourceRef="Gateway_1vyvinl" targetRef="CreateAccounts" />
+    <bpmn:sequenceFlow id="Flow_0c9fp39" sourceRef="Gateway_1vyvinl" targetRef="AddToSurvey" />
+    <bpmn:sequenceFlow id="Flow_059bqv3" sourceRef="CreateAccounts" targetRef="Gateway_0usskqf" />
     <bpmn:parallelGateway id="Gateway_0usskqf">
       <bpmn:incoming>Flow_059bqv3</bpmn:incoming>
       <bpmn:incoming>Flow_1jurpbc</bpmn:incoming>
       <bpmn:outgoing>Flow_0xkrr3a</bpmn:outgoing>
     </bpmn:parallelGateway>
-    <bpmn:sequenceFlow id="Flow_1jurpbc" sourceRef="Activity_1tspeje" targetRef="Gateway_0usskqf" />
-    <bpmn:sequenceFlow id="Flow_0xkrr3a" sourceRef="Gateway_0usskqf" targetRef="Activity_1ly5yet" />
-    <bpmn:task id="SendEmail" name="SendMessageToSelectSample">
+    <bpmn:sequenceFlow id="Flow_1jurpbc" sourceRef="AddToSurvey" targetRef="Gateway_0usskqf" />
+    <bpmn:sequenceFlow id="Flow_0xkrr3a" sourceRef="Gateway_0usskqf" targetRef="SetState" />
+    <bpmn:userTask id="SendEmail" name="SendMessageToSelectSample">
       <bpmn:incoming>Flow_1v1xgmv</bpmn:incoming>
-    </bpmn:task>
+    </bpmn:userTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="protools-camunda-test-process">
@@ -164,7 +164,7 @@
       <bpmndi:BPMNShape id="UserTask_08mft2c_di" bpmnElement="createSurvey">
         <dc:Bounds x="250" y="327" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0us0a0p_di" bpmnElement="selectSampleSize">
+      <bpmndi:BPMNShape id="Activity_0us0a0p_di" bpmnElement="SelectSampleSize">
         <dc:Bounds x="750" y="327" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1n0yp34_di" bpmnElement="Event_1n0yp34">
@@ -173,19 +173,19 @@
           <dc:Bounds x="1676" y="392" width="29" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_02zx9rg_di" bpmnElement="drawSample">
+      <bpmndi:BPMNShape id="Activity_02zx9rg_di" bpmnElement="DrawSample">
         <dc:Bounds x="940" y="327" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1rqvf6z_di" bpmnElement="Activity_0mg0o0d">
+      <bpmndi:BPMNShape id="Activity_1rqvf6z_di" bpmnElement="SaveNewSurvey">
         <dc:Bounds x="430" y="327" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0ymq7a7_di" bpmnElement="Activity_0q8dazl">
+      <bpmndi:BPMNShape id="Activity_0ymq7a7_di" bpmnElement="CreateAccounts">
         <dc:Bounds x="1250" y="230" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1rz4ccs_di" bpmnElement="Activity_1tspeje">
+      <bpmndi:BPMNShape id="Activity_1rz4ccs_di" bpmnElement="AddToSurvey">
         <dc:Bounds x="1250" y="420" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0tg07dr_di" bpmnElement="Activity_1ly5yet">
+      <bpmndi:BPMNShape id="Activity_0tg07dr_di" bpmnElement="SetState">
         <dc:Bounds x="1520" y="327" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0s1ps83_di" bpmnElement="Event_0r8maof">
@@ -203,7 +203,7 @@
       <bpmndi:BPMNShape id="Gateway_045tluz_di" bpmnElement="Gateway_0usskqf">
         <dc:Bounds x="1395" y="342" width="50" height="50" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0jdltex_di" bpmnElement="SendEmail">
+      <bpmndi:BPMNShape id="Activity_1lw1ot8_di" bpmnElement="SendEmail">
         <dc:Bounds x="870" y="450" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1w89h87_di" bpmnElement="Event_0c71p2f">
