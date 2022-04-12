@@ -7,40 +7,40 @@
     <bpmn:endEvent id="Sortie" name="Sortie">
       <bpmn:incoming>Flow_1de6jk9</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:serviceTask id="drawSample" name="Draw Sample" camunda:delegateExpression="#{drawSample}">
+    <bpmn:serviceTask id="DrawSampleID" name="Draw Sample" camunda:delegateExpression="${drawSample}">
       <bpmn:incoming>Flow_0dkelzi</bpmn:incoming>
       <bpmn:outgoing>Flow_1de6jk9</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:boundaryEvent id="Event_0c71p2f" attachedToRef="drawSample">
+    <bpmn:boundaryEvent id="Event_0c71p2f" attachedToRef="DrawSampleID">
       <bpmn:outgoing>Flow_11b1b4v</bpmn:outgoing>
       <bpmn:errorEventDefinition id="ErrorEventDefinition_0tdg4y6" />
     </bpmn:boundaryEvent>
     <bpmn:sequenceFlow id="Flow_11b1b4v" sourceRef="Event_0c71p2f" targetRef="ErrorTaskSampleSize" />
-    <bpmn:sequenceFlow id="Flow_1de6jk9" sourceRef="drawSample" targetRef="Sortie" />
+    <bpmn:sequenceFlow id="Flow_1de6jk9" sourceRef="DrawSampleID" targetRef="Sortie" />
     <bpmn:userTask id="ErrorTaskSampleSize" name="ErroMsg : Sample &#60; 5">
       <bpmn:incoming>Flow_11b1b4v</bpmn:incoming>
     </bpmn:userTask>
-    <bpmn:sequenceFlow id="Flow_0dkelzi" sourceRef="Entree" targetRef="drawSample" />
+    <bpmn:sequenceFlow id="Flow_0dkelzi" sourceRef="Entree" targetRef="DrawSampleID" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="cutProcess">
-      <bpmndi:BPMNEdge id="Flow_11b1b4v_di" bpmnElement="Flow_11b1b4v">
-        <di:waypoint x="350" y="249" />
-        <di:waypoint x="350" y="160" />
+      <bpmndi:BPMNEdge id="Flow_0dkelzi_di" bpmnElement="Flow_0dkelzi">
+        <di:waypoint x="188" y="307" />
+        <di:waypoint x="300" y="307" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1de6jk9_di" bpmnElement="Flow_1de6jk9">
         <di:waypoint x="400" y="307" />
         <di:waypoint x="492" y="307" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0dkelzi_di" bpmnElement="Flow_0dkelzi">
-        <di:waypoint x="188" y="307" />
-        <di:waypoint x="300" y="307" />
+      <bpmndi:BPMNEdge id="Flow_11b1b4v_di" bpmnElement="Flow_11b1b4v">
+        <di:waypoint x="350" y="249" />
+        <di:waypoint x="350" y="160" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Activity_02zx9rg_di" bpmnElement="drawSample">
-        <dc:Bounds x="300" y="267" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0065hk6_di" bpmnElement="ErrorTaskSampleSize">
-        <dc:Bounds x="300" y="80" width="100" height="80" />
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="Entree">
+        <dc:Bounds x="152" y="289" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="154" y="332" width="33" height="14" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1n0yp34_di" bpmnElement="Sortie">
         <dc:Bounds x="492" y="289" width="36" height="36" />
@@ -48,11 +48,11 @@
           <dc:Bounds x="496" y="332" width="29" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="Entree">
-        <dc:Bounds x="152" y="289" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="154" y="332" width="33" height="14" />
-        </bpmndi:BPMNLabel>
+      <bpmndi:BPMNShape id="Activity_02zx9rg_di" bpmnElement="DrawSampleID">
+        <dc:Bounds x="300" y="267" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0065hk6_di" bpmnElement="ErrorTaskSampleSize">
+        <dc:Bounds x="300" y="80" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1w89h87_di" bpmnElement="Event_0c71p2f">
         <dc:Bounds x="332" y="249" width="36" height="36" />

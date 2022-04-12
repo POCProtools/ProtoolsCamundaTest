@@ -12,6 +12,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.camunda.bpm.scenario.ProcessScenario;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.HashMap;
 
@@ -21,6 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(ProcessEngineExtension.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class ProcessTest {
 
     DelegateExecution execution;
@@ -36,8 +38,9 @@ public class ProcessTest {
     void setUp() { // Setup de l'environement d'exécution mock
         MockitoAnnotations.openMocks(this);
 
-
-
+        when(scenario.waitsAtUserTask("ErrorTaskSampleSize")).thenReturn((task) -> {
+            task.complete();
+        });
 
     }
 
@@ -45,9 +48,9 @@ public class ProcessTest {
     @Deployment(resources = {"processCut.bpmn"})
     void TestDrawSample() throws Exception{
         // Récupération de variables des task précédentes
-        variables.put("sampleSize", 8);
+        variables.put("sampleSize", "8");
         Scenario handler = Scenario.run(scenario).startByKey("cutProcess", variables).execute();
-        verify(scenario, atMostOnce()).hasCompleted("drawSample");
+        verify(scenario, atMostOnce()).hasCompleted("DrawSampleID");
         verify(scenario).hasFinished("Sortie");
 
     }
@@ -56,11 +59,9 @@ public class ProcessTest {
     @Deployment(resources = {"processCut.bpmn"})
     void TestDrawSampleError() throws Exception{
         // Récupération de variables des task précédentes
-        variables.put("sampleSize", 4);
-
-        Exception expectedEx = assertThrows(BpmnError.class, () ->
-                Scenario.run(scenario).startByKey("cutProcess", variables).execute()
-        );
+        variables.put("sampleSize", "4");
+        Scenario handler = Scenario.run(scenario).startByKey("cutProcess", variables).execute();
+        verify(scenario).hasCompleted("ErrorTaskSampleSize");
 
     }
 }

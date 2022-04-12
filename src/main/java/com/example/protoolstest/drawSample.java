@@ -5,6 +5,7 @@ import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import javax.inject.Named;
 import java.io.IOException;
@@ -14,6 +15,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 @Named
+@Component
 public class drawSample implements JavaDelegate {
     static final Logger LOGGER = LoggerFactory.getLogger(drawSample.class);
     public drawSample() {
