@@ -11,6 +11,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import javax.inject.Named;
 import javax.ws.rs.core.HttpHeaders;
@@ -23,6 +24,7 @@ import java.net.http.HttpResponse;
 import java.util.*;
 
 @Named
+@Component
 public class addToSurvey implements JavaDelegate {
     static final Logger LOGGER = LoggerFactory.getLogger(drawSample.class);
 
