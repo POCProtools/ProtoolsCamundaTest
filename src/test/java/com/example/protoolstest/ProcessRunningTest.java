@@ -13,7 +13,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import static org.camunda.bpm.engine.test.assertions.bpmn.BpmnAwareTests.runtimeService;
 
 @ExtendWith(ProcessEngineExtension.class)
-public class TestProcessRunning {
+public class ProcessRunningTest {
     @Test
     @Deployment(resources = {"testProcess.bpmn"})
     public void shouldExecuteProcess(){
