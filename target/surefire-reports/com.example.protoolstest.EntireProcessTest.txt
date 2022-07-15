@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.example.protoolstest.EntireProcessTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.406 sec - in com.example.protoolstest.EntireProcessTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.297 sec - in com.example.protoolstest.EntireProcessTest

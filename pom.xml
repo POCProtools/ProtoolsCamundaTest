@@ -183,6 +183,12 @@
       <scope>test</scope>
     </dependency>
 
+    <dependency>
+      <groupId>org.camunda.bpm.extension</groupId>
+      <artifactId>camunda-bpm-process-test-coverage-junit5</artifactId>
+      <version>1.0.3</version>
+    </dependency>
+
 
   </dependencies>
 

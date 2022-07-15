@@ -1,5 +1,5 @@
-# Protools-Camunda-Test
-Déroulement du processus de creation d'enquête utilisant Camunda
+# POC de Protools avec Camunda Platform7
+Exécution du protocole d'enquête minimal avec Camunda Platform 7 (ex community edition)
 ### Installation
 [Lien vers le deployment](https://protools-camunda.dev.insee.io/camunda/app/welcome/default/#!/login)
 
@@ -16,5 +16,4 @@ cd ProtoolsCamundaTest
 ```
 
 #### TODO:
-- Tests 
-- Intégration de mails (envoi)
+- Tests
