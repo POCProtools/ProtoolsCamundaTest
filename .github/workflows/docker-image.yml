@@ -25,7 +25,7 @@ jobs:
         run: mvn clean package -Dmaven.test.skip
 
       - name: Publish to Registry
-        uses: elgohr/Publish-Docker-Github-Action@master
+        uses: elgohr/Publish-Docker-Github-Action@v5
         with:
           name: ${{ secrets.DOCKER_USERNAME }}/protools-camunda
           username: ${{ secrets.DOCKER_USERNAME }}
